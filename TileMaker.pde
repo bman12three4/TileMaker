@@ -1,7 +1,8 @@
 ArrayList<BytePair> pairs;
 
 public static int field = 0;
-public static int col = 2;
+public static int col = 0;
+public static boolean bw = true;
 
 void setup() {
   size(1220, 640);
@@ -29,15 +30,22 @@ void updateButtons() {
   fill(0, 0, 0);
   text("Save", 1140, 50);
 
-  fill(200, 200, 200);
-  rect(1130, 65, 80, 20);
-  fill(0, 0, 0);
-  text("Field   " + field, 1140, 80);
+  if (!bw) {
+    fill(200, 200, 200);
+    rect(1130, 65, 80, 20);
+    fill(0, 0, 0);
+    text("Field   " + field, 1140, 80);
+  }
 
   fill(200, 200, 200);
   rect(1130, 95, 80, 20);
   fill(0, 0, 0);
   text("Color  " + col, 1140, 110);
+
+  fill(200, 200, 200);
+  rect(1130, 125, 80, 20);
+  fill(0, 0, 0);
+  text("BW?  " + bw, 1140, 140);
 }
 
 void mouseClicked() {
@@ -52,10 +60,25 @@ void mouseClicked() {
       }
     }
     if (mouseY>95 && mouseY < 115) {
-      if (col == 3) {
-        col = 0;
+      if (!bw) {
+        if (col > 2) {
+          col = 0;
+        } else {
+          col++;
+        }
       } else {
-        col++;
+        if (col > 0) {
+          col = 0;
+        } else {
+          col++;
+        }
+      }
+    }
+    if (mouseY>125 && mouseY < 145) {
+      if (bw) {
+        bw = false;
+      } else {
+        bw = true;
       }
     }
   }

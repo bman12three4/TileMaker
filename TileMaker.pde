@@ -8,7 +8,7 @@ void setup() {
   pairs = new ArrayList<BytePair>();
   for (int i = 0; i < 16; i++) {
     for (int j = 0; j < 2; j++) {
-      BytePair p = new BytePair(j, i, 1, 1);
+      BytePair p = new BytePair(j, i, 0, 0);
       pairs.add(p);
     }
   }

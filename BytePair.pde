@@ -38,8 +38,8 @@ class BytePair { //<>//
   void update() {
     if (!TileMaker.bw) {
       for (Cell c : cells) {
-        if (mouseX >= 560*x+c.getPos()*80 && mouseX < 560*x+(c.getPos()+1)*80 &&
-          mouseY >= y*40 && mouseY < (y+1)*40 &&
+        if (mouseX >= 14*TileMaker.scale*x+c.getPos()*TileMaker.scale*2 && mouseX < 14*TileMaker.scale*x+(c.getPos()+1)*TileMaker.scale*2 &&
+          mouseY >= y*TileMaker.scale && mouseY < (y+1)*TileMaker.scale &&
           mousePressed) {
           if (!fieldSet) {
             fieldSet = true;
@@ -53,24 +53,24 @@ class BytePair { //<>//
       }
     } else {
       for (BWCell bwc : bwcells) {
-        if (mouseX >= 560*x+bwc.getPos()*40 && mouseX < 560*x+(bwc.getPos()+1)*40 &&
-          mouseY >= y*40 && mouseY < (y+1)*40 &&
+        if (mouseX >= 14*TileMaker.scale*x+bwc.getPos()*TileMaker.scale && mouseX < 14*TileMaker.scale*x+(bwc.getPos()+1)*TileMaker.scale &&
+          mouseY >= y*TileMaker.scale && mouseY < (y+1)*TileMaker.scale &&
           mousePressed) {
           bwc.setColor(TileMaker.col);
-          bwdupdate(bwc);
         }
+        bwdupdate(bwc);
       }
     }
   }
 
   void dupdate(Cell c) {
     fill(c.getColor());
-    rect(560*x+c.getPos()*80, y*40, 80, 40);
+    rect(14*TileMaker.scale*x+c.getPos()*TileMaker.scale*2, y*TileMaker.scale, TileMaker.scale*2, TileMaker.scale);
   }
 
   void bwdupdate(BWCell bwc) {
     fill(bwc.getColor());
-    rect(560*x+bwc.getPos()*40, y*40, 40, 40);
+    rect(14*TileMaker.scale*x+bwc.getPos()*TileMaker.scale, y*TileMaker.scale, TileMaker.scale, TileMaker.scale);
   }
 
   void updateField() {
@@ -78,16 +78,13 @@ class BytePair { //<>//
     hb2 = field;
 
     int lcol = 0;
-    print(lcol + "    ");
     for (Cell c : cells) {
       lcol = c.getTC();
       if (field == 0) {
-        print(lcol + "  ");
         if (lcol > 3) {
           lcol-=4;
           c.setColor(lcol);
         }
-        println(lcol);
         dupdate(c);
       }
       if (field == 1) {
@@ -95,7 +92,6 @@ class BytePair { //<>//
           lcol+=4;
           c.setColor(lcol);
         }
-        println(lcol);
         dupdate(c);
       }
     }
@@ -124,8 +120,6 @@ class BytePair { //<>//
     }
     c+=cells.get(3).lb;
 
-    println(b);
-    println(c);
 
     String[] nums = new String[2];
 
@@ -141,13 +135,13 @@ class BytePair { //<>//
     for (int i = 6; i >= 0; i--) {
       b+=bwcells.get(i).getBit();
     }
-    
+
     String c = "";
     c+=0; // High bit is always 0
-    for (int i = 15; i <= 7; i--){
-     c+=bwcells.get(i).getBit(); 
+    for (int i = 15; i <= 7; i--) {
+      c+=bwcells.get(i).getBit();
     }
-    
+
     String[] nums = new String[2];
     nums[0] = Integer.toHexString(Integer.parseInt(b, 2));
     nums[1] = Integer.toHexString(Integer.parseInt(c, 2));

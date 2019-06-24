@@ -1,7 +1,7 @@
 class BWCell {
 
   int pos;
-  boolean colored = true;
+  boolean colored = false;
 
   BWCell(int x, boolean z) {
     pos = x;

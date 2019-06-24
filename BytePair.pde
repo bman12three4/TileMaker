@@ -138,7 +138,7 @@ class BytePair { //<>//
 
     String c = "";
     c+=0; // High bit is always 0
-    for (int i = 15; i <= 7; i--) {
+    for (int i = 13; i >= 7; i--) {
       c+=bwcells.get(i).getBit();
     }
 

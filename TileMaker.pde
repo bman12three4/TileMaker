@@ -29,15 +29,15 @@ void draw() {
     p.update();
     updateButtons();
   }
-  
-  for (int i = 1; i < w*2; i++){
-   fill (255, 0, 0);
-   rect(i*scale*7, 0, 2, height);
+
+  for (int i = 1; i < w*2; i++) {
+    fill (255, 0, 0);
+    rect(i*scale*7, 0, 2, height);
   }
-  
-  for (int i = 1; i < h; i++){
-   fill (255, 0, 0);
-   rect(0, i*scale*8, width-100, 2);
+
+  for (int i = 1; i < h; i++) {
+    fill (255, 0, 0);
+    rect(0, i*scale*8, width-100, 2);
   }
 }
 
@@ -109,18 +109,21 @@ void mouseClicked() {
 
 void compute() {
   String f = "";
-  for (int i = 0; i < 32; i+=2) {
+  for (int i = 0; i < w*h*8; i+=w) {
     String o = ".byte ";
-    String[] nums = pairs.get(i).compute();
-    String[] nums2 = pairs.get(i+1).compute();
+    String[][] nums = new String[w][2];
+    nums[0] = pairs.get(i).compute();
     o += "$";
-    o += nums[0];
+    o += nums[0][0];
     o += ", $";
-    o += nums[1];
-    o += ", $";
-    o += nums2[0];
-    o += ", $";
-    o += nums2[1];
+    o += nums[0][1];
+    for (int j = 1; j < w; j++) {
+      nums[j] = pairs.get(i+j).compute();
+      o += ", $";
+      o += nums[j][0];
+      o += ", $";
+      o += nums[j][1];
+    }
     f+=o;
     f+="\n";
   }

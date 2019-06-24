@@ -4,7 +4,7 @@ public static int field = 0;
 public static int col = 1;
 public static boolean bw = true;
 
-int w = 2; // this is for color so its actually 4 bytes wide
+int w = 2; // this is in color tiles, black and white tiles will be double this
 int h = 3;
 
 public static int scale = 30;
@@ -28,6 +28,16 @@ void draw() {
   for (BytePair p : pairs) {
     p.update();
     updateButtons();
+  }
+  
+  for (int i = 1; i < w*2; i++){
+   fill (255, 0, 0);
+   rect(i*scale*7, 0, 2, height);
+  }
+  
+  for (int i = 1; i < h; i++){
+   fill (255, 0, 0);
+   rect(0, i*scale*8, width-100, 2);
   }
 }
 

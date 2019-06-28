@@ -56,7 +56,6 @@ class Cell {
   }
   
   int getTC(){
-    println(tc);
     return tc;
   }
 

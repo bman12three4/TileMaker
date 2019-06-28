@@ -97,6 +97,21 @@ class BytePair { //<>//
     }
   }
 
+  void invert() {
+    for (BWCell bw : bwcells) {
+      bw.invert();
+    }
+  }
+
+  void reset() {
+    for (BWCell bw : bwcells) {
+      bw.setColor(0);
+    }
+    for (Cell c : cells) {
+      c.setColor(0);
+    }
+  }
+
   String[] compute() {
     if (TileMaker.bw)
       return bwcompute();

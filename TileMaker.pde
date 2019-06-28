@@ -27,8 +27,9 @@ void setup() {
 void draw() {
   for (BytePair p : pairs) {
     p.update();
-    updateButtons();
   }
+
+  updateButtons();
 
   for (int i = 1; i < w*2; i++) {
     fill (255, 0, 0);
@@ -68,6 +69,34 @@ void updateButtons() {
   rect(rightSide, 125, 80, 20);
   fill(0, 0, 0);
   text("BW?  " + bw, rightSide+10, 140);
+
+  fill(200, 200, 200);
+  rect(rightSide, 155, 80, 20);
+  fill(0, 0, 0);
+  text("Invert", rightSide+10, 170);
+
+  fill(200, 200, 200);
+  rect(rightSide, 185, 80, 20);
+  fill(0, 0, 0);
+  text("Clear", rightSide+10, 200);
+}
+
+void keyPressed() {
+  if (key == 'x' || key == 'X') {
+    if (!bw) {
+      if (col > 2) {
+        col = 0;
+      } else {
+        col++;
+      }
+    } else {
+      if (col > 0) {
+        col = 0;
+      } else {
+        col++;
+      }
+    }
+  }
 }
 
 void mouseClicked() {
@@ -102,6 +131,17 @@ void mouseClicked() {
         bw = false;
       } else {
         bw = true;
+      }
+    }
+
+    if (mouseY>155 && mouseY < 175) {
+      for (BytePair p : pairs) {
+        p.invert();
+      }
+    }
+    if (mouseY>185 && mouseY < 205) {
+      for (BytePair p : pairs) {
+        p.reset();
       }
     }
   }

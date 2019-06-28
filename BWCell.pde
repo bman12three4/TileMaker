@@ -7,6 +7,10 @@ class BWCell {
     pos = x;
     colored = z;
   }
+  
+  void invert(){
+   colored = colored == false; 
+  }
 
   color getColor() {
     if (colored)
